@@ -17,12 +17,12 @@ __ztl_namespace_start
 		typedef T						value_type;
 		typedef T&						reference;
 		typedef T*						iterator;
-		typedef const T*					const_iterator;
+		typedef const T*						const_iterator;
 		typedef __stl::random_access_iterator_tag		iterator_category;
 		typedef __stl::reverse_iterator<const_iterator>		const_reverse_iterator;
 		typedef __stl::reverse_iterator<iterator>		reverse_iterator;
 		typedef __stl::size_t					size_type;
-		typedef __stl::ptrdiff_t				difference_type;
+		typedef __stl::ptrdiff_t					difference_type;
 
 	private:
 		iterator p_begin;
