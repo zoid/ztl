@@ -91,7 +91,7 @@ __ztl_namespace_start
 		rb_iterator() { }
 		rb_iterator(Node* _x) : ptr(_x) { }
 
-		inline reference	operator*() const { return &ptr->m_value; }
+		inline reference	operator*() const { return ptr->m_value; }
 		inline pointer		operator->() const { return &(operator*()); }
 
 		inline Self&		operator++() { ptr = ptr->m_next(); return *this; }
