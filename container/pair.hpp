@@ -13,7 +13,7 @@ __ztl_namespace_start
 		T1 first;
 		T2 second;
 
-		pair() : first(_T1()), second(_T2()) { }
+		pair() : first(T1()), second(T2()) { }
 		pair(const T1& _a, const T2& _b) : first(_a), second(_b) { }
 
 		template <class U1, class U2>
