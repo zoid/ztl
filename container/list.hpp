@@ -60,14 +60,14 @@ __ztl_namespace_start
 	template<typename Key>
 	struct list_const_iterator
 	{
-		typedef list_const_iterator<Key>						Self;
-		typedef const list_node<Key>							Node;
-		typedef list_iterator<Key>							iterator;
-		typedef ptrdiff_t								difference_type;
-		typedef __stl::bidirectional_iterator_tag					iterator_category;
-		typedef const Key								value_type;
-		typedef const Key*								pointer;
-		typedef const Key&								reference;
+		typedef list_const_iterator<Key>		Self;
+		typedef const list_node<Key>			Node;
+		typedef list_iterator<Key>			iterator;
+		typedef ptrdiff_t				difference_type;
+		typedef __stl::bidirectional_iterator_tag	iterator_category;
+		typedef const Key				value_type;
+		typedef const Key*				pointer;
+		typedef const Key&				reference;
 
 		list_const_iterator() { }
 		list_const_iterator(const Node* _x) : ptr(_x) { }
