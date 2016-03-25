@@ -79,13 +79,13 @@ __ztl_namespace_start
 
 	template <class Key, class Value>
 	struct rb_iterator {
-		typedef rb_iterator<Key, Value>							Self;
-		typedef rb_node<Key, Value>								Node;
-		typedef __stl::bidirectional_iterator_tag				iterator_category;
-		typedef __stl::ptrdiff_t								difference_type;
-		typedef Value											value_type;
-		typedef Value&											reference;
-		typedef Value											pointer;
+		typedef rb_iterator<Key, Value>					Self;
+		typedef rb_node<Key, Value>					Node;
+		typedef __stl::bidirectional_iterator_tag			iterator_category;
+		typedef __stl::ptrdiff_t					difference_type;
+		typedef Value							value_type;
+		typedef Value&							reference;
+		typedef Value							pointer;
 
 
 		rb_iterator() { }
@@ -95,26 +95,26 @@ __ztl_namespace_start
 		inline pointer		operator->() const { return &(operator*()); }
 
 		inline Self&		operator++() { ptr = ptr->m_next(); return *this; }
-		inline Self			operator++(int) { Self tmp = *this; tmp.ptr = tmp.ptr->m_next(); return tmp; }
+		inline Self		operator++(int) { Self tmp = *this; tmp.ptr = tmp.ptr->m_next(); return tmp; }
 		inline Self&		operator--() { ptr = ptr->m_prev(); return *this; }
-		inline Self			operator--(int) { Self tmp = *this; tmp.ptr = tmp.ptr->m_prev(); return tmp; }
+		inline Self		operator--(int) { Self tmp = *this; tmp.ptr = tmp.ptr->m_prev(); return tmp; }
 
-		inline bool			operator== (const Self&_x) { return _x.ptr == this->ptr; }
-		inline bool			operator!= (const Self& _x) { return _x.ptr != this->ptr; }
+		inline bool		operator== (const Self&_x) { return _x.ptr == this->ptr; }
+		inline bool		operator!= (const Self& _x) { return _x.ptr != this->ptr; }
 
 		Node* ptr;
 	};
 
 	template <class Key, class Value>
 	struct const_rb_iterator {
-		typedef const_rb_iterator								Self;
-		typedef rb_node<Key, Value>								Node;
-		typedef __stl::bidirectional_iterator_tag				iterator_category;
-		typedef __stl::ptrdiff_t								difference_type;
-		typedef Value											value_type;
-		typedef Value&											reference;
-		typedef Value											pointer;
-		typedef rb_iterator<Key, Value>							iterator;
+		typedef const_rb_iterator					Self;
+		typedef rb_node<Key, Value>					Node;
+		typedef __stl::bidirectional_iterator_tag			iterator_category;
+		typedef __stl::ptrdiff_t					difference_type;
+		typedef Value							value_type;
+		typedef Value&							reference;
+		typedef Value							pointer;
+		typedef rb_iterator<Key, Value>					iterator;
 
 		const_rb_iterator() { }
 		const_rb_iterator(Node* _x) : ptr(_x) { }
@@ -124,12 +124,12 @@ __ztl_namespace_start
 		inline pointer		operator->() const { return &(operator*()); }
 
 		inline Self&		operator++() { ptr = ptr->m_next(); return *this; }
-		inline Self			operator++(int) { Self tmp = *this; tmp.ptr = tmp.ptr->m_next(); return tmp; }
+		inline Self		operator++(int) { Self tmp = *this; tmp.ptr = tmp.ptr->m_next(); return tmp; }
 		inline Self&		operator--() { ptr = ptr->m_prev(); return *this; }
-		inline Self			operator--(int) { Self tmp = *this; tmp.ptr = tmp.ptr->m_prev(); return tmp; }
+		inline Self		operator--(int) { Self tmp = *this; tmp.ptr = tmp.ptr->m_prev(); return tmp; }
 
-		inline bool			operator== (Self& _x) { return _x.ptr == this->ptr; }
-		inline bool			operator!= (Self& _x) { return _x.ptr != this->ptr; }
+		inline bool		operator== (Self& _x) { return _x.ptr == this->ptr; }
+		inline bool		operator!= (Self& _x) { return _x.ptr != this->ptr; }
 
 		Node* ptr;
 	};
@@ -138,18 +138,18 @@ __ztl_namespace_start
 	class rb_tree {
 	public:
 		typedef Key							key_type;
-		typedef Value						value_type;
-		typedef value_type*					pointer;
-		typedef const value_type*			const_pointer;
-		typedef value_type&					reference;
-		typedef const value_type&			const_reference;
-		typedef __stl::size_t					size_type;
-		typedef __stl::ptrdiff_t				difference_type;
+		typedef Value							value_type;
+		typedef value_type*						pointer;
+		typedef const value_type*					const_pointer;
+		typedef value_type&						reference;
+		typedef const value_type&					const_reference;
+		typedef __stl::size_t						size_type;
+		typedef __stl::ptrdiff_t					difference_type;
 
-		typedef rb_iterator<Key, Value>						iterator;
+		typedef rb_iterator<Key, Value>					iterator;
 		typedef const_rb_iterator<Key, Value>				const_iterator;
-		typedef __stl::reverse_iterator<const_iterator>		const_reverse_iterator;
-		typedef __stl::reverse_iterator<iterator>				reverse_iterator;
+		typedef __stl::reverse_iterator<const_iterator>			const_reverse_iterator;
+		typedef __stl::reverse_iterator<iterator>			reverse_iterator;
 
 		rb_tree() : m_size(0), m_comparer(), m_header(new Node()) { this->m_initialize(); }
 		rb_tree(const Compare& _comp) : m_size(0), m_comparer(_comp), m_header(new Node()) { this->m_initialize(); }
@@ -178,32 +178,30 @@ __ztl_namespace_start
 
 			y->m_parent = _x->m_parent;
 
-			if (_x == _root)						_root = y;
+			if (_x == _root)			_root = y;
 			else if (_x == _x->m_parent->m_left)	_x->m_parent->m_left = y;
-			else									_x->m_parent->m_right = y;
+			else					_x->m_parent->m_right = y;
 
 			y->m_left = _x;
 			_x->m_parent = y;
 		}
 
-		inline void m_rotate_right(Node* _x, Node*& _root)
-		{
+		inline void m_rotate_right(Node* _x, Node*& _root) {
 			Node* y = _x->m_left;
 			_x->m_left = y->m_right;
 			if (y->m_right != 0)
 				y->m_right->m_parent = _x;
 			y->m_parent = _x->m_parent;
 
-			if (_x == _root)						_root = y;
+			if (_x == _root)			_root = y;
 			else if (_x == _x->m_parent->m_right)	_x->m_parent->m_right = y;
-			else									_x->m_parent->m_left = y;
+			else					_x->m_parent->m_left = y;
 
 			y->m_right = _x;
 			_x->m_parent = y;
 		}
 
-		inline void m_rebalance(Node* _x, Node*& _root)
-		{
+		inline void m_rebalance(Node* _x, Node*& _root) {
 			_x->m_color = RED;
 			while (_x != _root && _x->m_parent->m_color == RED) {
 				if (_x->m_parent == _x->m_parent->m_parent->m_left) {
@@ -248,8 +246,7 @@ __ztl_namespace_start
 
 
 
-		inline Node* m_rebalance_erase(Node* z, Node*& _root, Node*& _leftmost, Node*& _rightmost)
-		{
+		inline Node* m_rebalance_erase(Node* z, Node*& _root, Node*& _leftmost, Node*& _rightmost) {
 			Node* y = z;
 			Node* x = 0;
 			Node* parent = 0;
@@ -376,8 +373,7 @@ __ztl_namespace_start
 
 
 
-		inline Node* m_create_node(const Key& _key, const Value& _val)
-		{
+		inline Node* m_create_node(const Key& _key, const Value& _val) {
 			Node* tmp = new Node(_key, _val);
 			return tmp;
 		}
@@ -414,26 +410,25 @@ __ztl_namespace_start
 			m_rightmost() = m_header;
 		}
 
-		inline rb_iterator<Key, Value> m_insert(Node* _x, Node* _y, const Key& _k, const Value& _v)
-		{
+		inline rb_iterator<Key, Value> m_insert(Node* _x, Node* _y, const Key& _k, const Value& _v) {
 			Node* z;
 
 			if (_y == this->m_header || _x != 0 || m_comparer(_k, s_key(_y))) {
 				z = m_create_node(_k, _v);
-				s_left(_y) = z;					// also makes m_leftmost() = z 
-												//    when _y == m_header
+				s_left(_y) = z;					
+										
 				if (_y == this->m_header) {
 					m_root() = z;
 					m_rightmost() = z;
 				}
 				else if (_y == m_leftmost())
-					m_leftmost() = z;   // maintain m_leftmost() pointing to min node
+					m_leftmost() = z;   
 			}
 			else {
 				z = this->m_create_node(_k, _v);
 				s_right(_y) = z;
 				if (_y == m_rightmost())
-					m_rightmost() = z;  // maintain m_rightmost() pointing to max node
+					m_rightmost() = z;  
 			}
 			s_parent(z) = _y;
 			s_left(z) = 0;
@@ -486,20 +481,20 @@ __ztl_namespace_start
 	public:
 
 		// ACCESS
-		inline Compare						key_comp() const { return m_comparer; }
-		inline iterator						begin() { return m_leftmost(); }
+		inline Compare					key_comp() const { return m_comparer; }
+		inline iterator					begin() { return m_leftmost(); }
 		inline const_iterator				cbegin() const { return m_leftmost(); }
-		inline iterator						end() { return m_header; }
+		inline iterator					end() { return m_header; }
 		inline const_iterator				cend() const { return m_header; }
 		inline reverse_iterator				rbegin() { return reverse_iterator(end()); }
-		inline const_reverse_iterator		crbegin() const { return const_reverse_iterator(end()); }
+		inline const_reverse_iterator			crbegin() const { return const_reverse_iterator(end()); }
 		inline reverse_iterator				rend() { return reverse_iterator(begin()); }
-		inline const_reverse_iterator		crend() const { return const_reverse_iterator(begin()); }
+		inline const_reverse_iterator			crend() const { return const_reverse_iterator(begin()); }
 
 
-		inline bool							empty() const { return m_size == 0; }
-		inline size_type					size() const { return m_size; }
-		inline size_type					maxsize() const { return (size_t)-1; }
+		inline bool					empty() const { return m_size == 0; }
+		inline size_type				size() const { return m_size; }
+		inline size_type				maxsize() const { return (size_t)-1; }
 
 
 		// MODIFY
@@ -713,4 +708,5 @@ __ztl_namespace_start
 
 	};
 __ztl_namespace_end
+
 #endif /* _rb_tree_hpp_1337420 */
