@@ -14,15 +14,15 @@ __ztl_namespace_start
 	template <class T>
 	class vector {
 	public:
-		typedef T										value_type;
-		typedef T&										reference;
-		typedef T*										iterator;
-		typedef const T*								const_iterator;
+		typedef T						value_type;
+		typedef T&						reference;
+		typedef T*						iterator;
+		typedef const T*					const_iterator;
 		typedef __stl::random_access_iterator_tag		iterator_category;
-		typedef __stl::reverse_iterator<const_iterator>	const_reverse_iterator;
+		typedef __stl::reverse_iterator<const_iterator>		const_reverse_iterator;
 		typedef __stl::reverse_iterator<iterator>		reverse_iterator;
-		typedef __stl::size_t							size_type;
-		typedef __stl::ptrdiff_t						difference_type;
+		typedef __stl::size_t					size_type;
+		typedef __stl::ptrdiff_t				difference_type;
 
 	private:
 		iterator p_begin;
@@ -92,28 +92,28 @@ __ztl_namespace_start
 
 
 		/* Iterators */
-		inline iterator					begin() { return p_begin; }
-		inline iterator					end() { return p_end; }
+		inline iterator				begin() { return p_begin; }
+		inline iterator				end() { return p_end; }
 		inline const_iterator			cbegin() const { return p_begin; }
 		inline const_iterator			cend() const { return p_end; }
 		inline reverse_iterator			rbegin() { return reverse_iterator(p_end); }
 		inline reverse_iterator			rend() { return reverse_iterator(p_begin); }
-		inline const_reverse_iterator	crbegin() const { return const_reverse_iterator(p_end); }
-		inline const_reverse_iterator	crend() const { return const_reverse_iterator(p_begin); }
+		inline const_reverse_iterator		crbegin() const { return const_reverse_iterator(p_end); }
+		inline const_reverse_iterator		crend() const { return const_reverse_iterator(p_begin); }
 
-		inline reference				first() { return *p_begin; }
+		inline reference			first() { return *p_begin; }
 		inline const reference			first() const { return *p_begin; }
-		inline reference				last() { return *p_last; }
+		inline reference			last() { return *p_last; }
 		inline const reference			last() const { return *p_last; }
 
 		/* Size / Allocation */
-		inline bool						empty() const { return size() == 0; }
-		inline size_type				size() const { return p_last - p_begin + 1; }
-		inline size_type				reserved() const { return p_end - p_begin + 1; }
-		inline void						reserve(size_type num) { enlarge(num); }
-		inline void						clear() { erase(p_begin, p_last); }
-		inline void						erase(size_type a, size_type b) { erase(p_begin + a, p_begin + b); }
-		inline void						erase(iterator pa, iterator pb) {
+		inline bool				empty() const { return size() == 0; }
+		inline size_type			size() const { return p_last - p_begin + 1; }
+		inline size_type			reserved() const { return p_end - p_begin + 1; }
+		inline void				reserve(size_type num) { enlarge(num); }
+		inline void				clear() { erase(p_begin, p_last); }
+		inline void				erase(size_type a, size_type b) { erase(p_begin + a, p_begin + b); }
+		inline void				erase(iterator pa, iterator pb) {
 			if (!__stl::is_trivially_destructible<value_type>::value) {
 				iterator a = pa - 1;
 				while (a < pb) (++a)->~T();
