@@ -8,10 +8,10 @@ __ztl_namespace_start
 template <class Key, class Compare = __stl::less<Key> >
 class set {
 public:
-	typedef Key										key_type;
-	typedef Key										value_type;
-	typedef Compare									key_compare;
-	typedef Compare									value_compare;
+	typedef Key						key_type;
+	typedef Key						value_type;
+	typedef Compare						key_compare;
+	typedef Compare						value_compare;
 
 private:
 	typedef rb_tree<Key, Key, key_compare>			Tree;
@@ -24,9 +24,9 @@ public:
 	typedef typename Tree::const_reference			const_reference;
 	typedef typename Tree::const_iterator			iterator;
 	typedef typename Tree::const_iterator			const_iterator;
-	typedef typename Tree::const_reverse_iterator	reverse_iterator;
-	typedef typename Tree::const_reverse_iterator	const_reverse_iterator;
-	typedef typename Tree::size_type				size_type;
+	typedef typename Tree::const_reverse_iterator		reverse_iterator;
+	typedef typename Tree::const_reverse_iterator		const_reverse_iterator;
+	typedef typename Tree::size_type			size_type;
 	typedef typename Tree::difference_type			difference_type;
 
 
@@ -36,21 +36,21 @@ public:
 
 
 	// ACCESS:
-	inline key_compare				key_comp() const { return m_tree.key_comp(); }
+	inline key_compare			key_comp() const { return m_tree.key_comp(); }
 	inline value_compare			value_comp() const { return m_tree.key_comp(); }
 
-	inline iterator					begin() const { return m_tree.cbegin(); }
-	inline iterator					end() const { return m_tree.cend(); }
+	inline iterator				begin() const { return m_tree.cbegin(); }
+	inline iterator				end() const { return m_tree.cend(); }
 	inline reverse_iterator			rbegin() const { return m_tree.rbegin(); }
 	inline reverse_iterator			rend() const { return m_tree.rend(); }
 
-	inline bool						empty() const { return m_tree.empty(); }
-	inline size_type				size() const { return m_tree.size(); }
-	inline size_type				max_size() const { return m_tree.max_size(); }
-	inline void						swap(set<Key, Compare>& _x) { m_tree.swap(_x.m_tree); }
+	inline bool				empty() const { return m_tree.empty(); }
+	inline size_type			size() const { return m_tree.size(); }
+	inline size_type			max_size() const { return m_tree.max_size(); }
+	inline void				swap(set<Key, Compare>& _x) { m_tree.swap(_x.m_tree); }
 
 	// MODIFY
-	inline pair<iterator, bool>	insert(const value_type& _x) {
+	inline pair<iterator, bool> insert(const value_type& _x) {
 		pair<typename Tree::iterator, bool> p = m_tree.insert_unique(_x, _x);
 		return make_pair(p.first, p.second);
 	}
@@ -60,11 +60,10 @@ public:
 	}
 
 
-	inline void						clear() { m_tree.clear(); }
-	inline void						erase(iterator _position) { m_tree.erase((typename Tree::iterator&)_position); }
-	inline size_type				erase(const key_type& _x) { return m_tree.erase(_x); }
-
-	inline void erase(iterator _first, iterator _last) {
+	inline void				clear() { m_tree.clear(); }
+	inline void				erase(iterator _position) { m_tree.erase((typename Tree::iterator&)_position); }
+	inline size_type			erase(const key_type& _x) { return m_tree.erase(_x); }
+	inline void 				erase(iterator _first, iterator _last) {
 		m_tree.erase((typename Tree::iterator&)_first, (typename Tree::iterator&)_last);
 	}
 
