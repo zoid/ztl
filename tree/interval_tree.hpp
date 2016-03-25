@@ -12,15 +12,15 @@ __ztl_namespace_start
 	class interval_tree {
 	public:
 		typedef vector<interval<T, K>>		iv;
-		typedef interval_tree<T, K>*		tree_ptr;
+		typedef interval_tree*		tree_ptr;
 
 		iv intervals;
 		tree_ptr left;
 		tree_ptr right;
 		K center;
 
-		interval_tree<T, K>(void) : left(NULL), right(NULL), center(K()) { }
-		interval_tree<T, K>(iv& ivals, K depth = 16, K minbucket = 64, K leftextent = 0, K rightextent = 0, K maxbucket = 512) {
+		interval_tree(void) : left(NULL), right(NULL), center(K()) { }
+		interval_tree(iv& ivals, K depth = 16, K minbucket = 64, K leftextent = 0, K rightextent = 0, K maxbucket = 512) {
 			--depth;
 			if (depth == 0 || (ivals.size() < minbucket && ivals.size() < maxbucket)) {
 				__stl::sort(ivals.begin(), ivals.end(), interval<T, K>::start_comparer());
@@ -60,22 +60,22 @@ __ztl_namespace_start
 				}
 
 				if (!lefts.empty()) {
-					left = tree_ptr(new interval_tree<T, K>(lefts, depth, minbucket, leftp, centerp));
+					left = tree_ptr(new interval_tree(lefts, depth, minbucket, leftp, centerp));
 				}
 				if (!rights.empty()) {
-					right = tree_ptr(new interval_tree<T, K>(rights, depth, minbucket, centerp, rightp));
+					right = tree_ptr(new interval_tree(rights, depth, minbucket, centerp, rightp));
 				}
 			}
 		}
 
-		interval_tree<T, K>(const interval_tree<T, K>&) {
+		interval_tree(const interval_tree&) {
 			intervals = other.intervals;
 			left = other.left ? copyTree(*other.left) : NULL;
 			right = other.right ? copyTree(*other.right) : NULL;
 			center = other.center;
 		}
 
-		interval_tree<T, K>& operator=(const interval_tree<T, K>&) {
+		interval_tree& operator=(const interval_tree&) {
 			center = other.center;
 			intervals = other.intervals;
 			left = other.left ? copyTree(*other.left) : NULL;
@@ -85,7 +85,7 @@ __ztl_namespace_start
 		~interval_tree(void) = default;
 
 	private:
-		inline tree_ptr copyTree(const interval_tree<T, K>& orig) { return tree_ptr(new interval_tree<T, K>(orig)); }
+		inline tree_ptr copyTree(const interval_tree& orig) { return tree_ptr(new interval_tree(orig)); }
 
 		void m_query_overlapping(K start, K stop, iv& overlapping) const {
 			if (!intervals.empty() && !(stop < intervals.front().start))
