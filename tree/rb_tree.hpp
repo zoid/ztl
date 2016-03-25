@@ -28,7 +28,7 @@ __ztl_namespace_start
 
 		inline static Node* min(Node* _x) {
 			while (_x->m_left != 0) _x = _x->m_left;
-			return _x;ptr
+			return _x;
 		}
 
 		inline static Node* max(Node* _x) {
@@ -278,7 +278,7 @@ __ztl_namespace_start
 					else
 						z->m_parent->m_right = y;
 					y->m_parent = z->m_parent;
-					_sTD::swap(y->m_color, z->m_color);
+					__stl::swap(y->m_color, z->m_color);
 					y = z;
 				}
 				else {                        // y == z
@@ -295,12 +295,12 @@ __ztl_namespace_start
 						if (z->m_right == 0)        
 							_leftmost = z->m_parent;
 						else
-							_leftmost = rb_node::min(x);
+							_leftmost = Node::min(x);
 					if (_rightmost == z)
 						if (z->m_left == 0)         
 							_rightmost = z->m_parent;
 						else                      
-							_rightmost = rb_node::max(x);
+							_rightmost = Node::max(x);
 				}
 				if (y->m_color != RED) {
 					while (x != _root && (x == 0 || x->m_color == BLACK))
@@ -580,7 +580,7 @@ __ztl_namespace_start
 
 		iterator insert_unique(iterator _position, const Key& _k, const Value& _v) {
 			if (_position.ptr == this->m_header->m_left) { // begin()
-				if (size() > 0 && this->m_comparer(_k, _position.ptr->m_k))
+				if (size() > 0 && this->m_comparer(_k, _position.ptr->m_key))
 					return this->m_insert(_position.ptr, _position.ptr, _k, _v);
 				else
 					return this->insert_unique(_k, _v).first;
