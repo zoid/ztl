@@ -26,7 +26,7 @@ public:
 	typedef typename Tree::const_iterator			const_iterator;
 	typedef typename Tree::const_reverse_iterator		reverse_iterator;
 	typedef typename Tree::const_reverse_iterator		const_reverse_iterator;
-	typedef typename Tree::size_type			size_type;
+	typedef typename Tree::size_type				size_type;
 	typedef typename Tree::difference_type			difference_type;
 
 
