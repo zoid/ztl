@@ -82,7 +82,7 @@ __ztl_namespace_start
 		typedef rb_iterator<Key, Value>					Self;
 		typedef rb_node<Key, Value>					Node;
 		typedef __stl::bidirectional_iterator_tag			iterator_category;
-		typedef __stl::ptrdiff_t					difference_type;
+		typedef __stl::ptrdiff_t						difference_type;
 		typedef Value							value_type;
 		typedef Value&							reference;
 		typedef Value							pointer;
@@ -110,7 +110,7 @@ __ztl_namespace_start
 		typedef const_rb_iterator					Self;
 		typedef rb_node<Key, Value>					Node;
 		typedef __stl::bidirectional_iterator_tag			iterator_category;
-		typedef __stl::ptrdiff_t					difference_type;
+		typedef __stl::ptrdiff_t						difference_type;
 		typedef Value							value_type;
 		typedef Value&							reference;
 		typedef Value							pointer;
@@ -144,7 +144,7 @@ __ztl_namespace_start
 		typedef value_type&						reference;
 		typedef const value_type&					const_reference;
 		typedef __stl::size_t						size_type;
-		typedef __stl::ptrdiff_t					difference_type;
+		typedef __stl::ptrdiff_t						difference_type;
 
 		typedef rb_iterator<Key, Value>					iterator;
 		typedef const_rb_iterator<Key, Value>				const_iterator;
