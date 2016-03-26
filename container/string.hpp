@@ -48,7 +48,7 @@ public:
 		memset(m_data, 0, m_capacity + 1);
 	}
 
-	string::string(const string & _x) : m_capacity(_x.m_capacity), m_length(_x.m_length) {
+	string(const string & _x) : m_capacity(_x.m_capacity), m_length(_x.m_length) {
 		if (_x != string::empty) {
 			m_data = new char[m_capacity + 1];
 			memset(m_data, 0, m_capacity + 1);
@@ -61,8 +61,7 @@ public:
 		}
 	}
 
-	~string()
-	{
+	~string() {
 		m_length = 0;
 		m_capacity = 0;
 		delete[] m_data;
