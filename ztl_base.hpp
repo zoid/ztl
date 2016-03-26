@@ -13,6 +13,7 @@
 #define __stl std
 #endif
 
+//Use stl containers if possible
 #define __stl_compatibility 1
 
 #endif /* __ztl_base_loaded */
