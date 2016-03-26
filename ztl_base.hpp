@@ -13,4 +13,6 @@
 #define __stl std
 #endif
 
+#define __stl_compatibility 1
+
 #endif /* __ztl_base_loaded */
