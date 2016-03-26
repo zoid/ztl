@@ -16,13 +16,13 @@ __ztl_namespace_start
 
 class string {
 public:
-	typedef unsigned long long						          size_type;
-	typedef int										                  difference_type;
-	typedef char*									                  iterator;
-	typedef const char*								              const_iterator;
-	typedef __stl::reverse_iterator<iterator>		    reverse_iterator;
-	typedef __stl::reverse_iterator<const_iterator>	const_reverse_iterator;
-	typedef __stl::random_access_iterator_tag		    iterator_category;
+	typedef unsigned long long				size_type;
+	typedef int						difference_type;
+	typedef char*						iterator;
+	typedef const char*					const_iterator;
+	typedef __stl::reverse_iterator<iterator>		reverse_iterator;
+	typedef __stl::reverse_iterator<const_iterator>		const_reverse_iterator;
+	typedef __stl::random_access_iterator_tag		iterator_category;
 	
 private:
 	int m_capacity;
@@ -194,21 +194,21 @@ public:
 		return m_data[_i];
 	}
 
-	inline size_type					          length() const { return m_length; }
-	inline size_type					          size() const { return m_length;	}
-	inline size_type					          max_size() const { return size_type(-1); }
-	inline size_type					          capacity() const { return m_capacity; }
+	inline size_type			length() const { return m_length; }
+	inline size_type			size() const { return m_length;	}
+	inline size_type			max_size() const { return size_type(-1); }
+	inline size_type			capacity() const { return m_capacity; }
 	
-	inline iterator						          begin() { return m_data; }
-	inline iterator						          end() { return m_data + m_length; }
-	inline const_iterator				        cbegin() const { return m_data; }
-	inline const_iterator				        cend() const { return m_data + m_length; }
-	inline reverse_iterator				      rbegin() { return reverse_iterator(end()); }
-	inline reverse_iterator				      rend() { return reverse_iterator(begin()); }
-	inline const_reverse_iterator		    crbegin() const { return const_reverse_iterator(cend()); }
-	inline const_reverse_iterator		    crend() const { return const_reverse_iterator(cbegin()); }
+	inline iterator				begin() { return m_data; }
+	inline iterator				end() { return m_data + m_length; }
+	inline const_iterator			cbegin() const { return m_data; }
+	inline const_iterator			cend() const { return m_data + m_length; }
+	inline reverse_iterator			rbegin() { return reverse_iterator(end()); }
+	inline reverse_iterator			rend() { return reverse_iterator(begin()); }
+	inline const_reverse_iterator		crbegin() const { return const_reverse_iterator(cend()); }
+	inline const_reverse_iterator		crend() const { return const_reverse_iterator(cbegin()); }
 
-	inline const char*					        c_str() const { return m_data; }
+	inline const char*			c_str() const { return m_data; }
 
 	string& substr(int start_index, int length) const {
 		if (start_index + length > m_length) {
