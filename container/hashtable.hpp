@@ -24,17 +24,17 @@ template <class Value, class Key, class HashAlg, class KeyVal, class KeyComp> st
 
 template <class Value, class Key, class HashAlg, class KeyVal, class KeyComp>
 struct hashtable_iterator {
-	typedef hashtable_node<Value>											Node;
-	typedef hashtable<Value, Key, HashAlg, KeyVal, KeyComp>					HTable;
+	typedef hashtable_node<Value>							Node;
+	typedef hashtable<Value, Key, HashAlg, KeyVal, KeyComp>				HTable;
 	typedef hashtable_iterator<Value, Key, HashAlg, KeyVal, KeyComp>		Self;
-	typedef hashtable_const_iterator<Value, Key, HashAlg, KeyVal, KeyComp>	const_iterator;
+	typedef hashtable_const_iterator<Value, Key, HashAlg, KeyVal, KeyComp>		const_iterator;
 
-	typedef __stl::forward_iterator_tag										iterator_category;
-	typedef Value															value_type;
-	typedef int																difference_type;
-	typedef size_t															size_type;
-	typedef Value&															reference;
-	typedef Value*															pointer;
+	typedef __stl::forward_iterator_tag						iterator_category;
+	typedef Value									value_type;
+	typedef int									difference_type;
+	typedef size_t									size_type;
+	typedef Value&									reference;
+	typedef Value*									pointer;
 
 	Node* ptr;
 	HTable* m_table;
@@ -69,18 +69,18 @@ struct hashtable_iterator {
 
 template <class Value, class Key, class HashAlg, class KeyVal, class KeyComp>
 struct hashtable_const_iterator {
-	typedef hashtable_node<Value>											Node;
-	typedef hashtable<Value, Key, HashAlg, KeyVal, KeyComp>					HTable;
+	typedef hashtable_node<Value>							Node;
+	typedef hashtable<Value, Key, HashAlg, KeyVal, KeyComp>				HTable;
 	typedef hashtable_iterator<Value, Key, HashAlg, KeyVal, KeyComp>		iterator;
-	typedef hashtable_const_iterator<Value, Key, HashAlg, KeyVal, KeyComp>	Self;
+	typedef hashtable_const_iterator<Value, Key, HashAlg, KeyVal, KeyComp>		Self;
 
 
-	typedef __stl::forward_iterator_tag										iterator_category;
-	typedef Value															value_type;
-	typedef int																difference_type;
-	typedef size_t															size_type;
-	typedef const Value&													reference;
-	typedef const Value*													pointer;
+	typedef __stl::forward_iterator_tag						iterator_category;
+	typedef Value									value_type;
+	typedef int									difference_type;
+	typedef size_t									size_type;
+	typedef const Value&								reference;
+	typedef const Value*								pointer;
 
 	const Node* ptr;
 	const HTable* m_table;
@@ -113,7 +113,6 @@ struct hashtable_const_iterator {
 };
 
 static const int primes_size = 28;
-
 static const unsigned long primes[primes_size] = {
 	53ul,         97ul,         193ul,       389ul,       769ul,
 	1543ul,       3079ul,       6151ul,      12289ul,     24593ul,
@@ -123,7 +122,7 @@ static const unsigned long primes[primes_size] = {
 	1610612741ul, 3221225473ul, 4294967291ul
 };
 
-inline unsigned long m_next_prime(unsigned long n) {
+unsigned long next_prime(unsigned long n) {
 	int pos = 0;
 	for (; pos < primes_size && primes[pos] < n; pos++) {}
 	return pos == primes_size ? primes[pos - 1] : primes[pos];
@@ -454,7 +453,6 @@ public:
 					}
 					m_buckets.swap(tmp);
 				}
-#ifdef __stl_compatibility
 				catch (...) {
 					for (size_type bucket = 0; bucket < tmp.size(); ++bucket) {
 						while (tmp[bucket]) {
@@ -465,13 +463,12 @@ public:
 					}
 					throw;
 				}
-#endif
 			}
 		}
 	}
 
 private:
-	inline size_type m_next_size(size_type _n) const { return m_next_prime(_n); }
+	inline size_type m_next_size(size_type _n) const { return next_prime(_n); }
 	inline void m_create_buckets(size_type _n) {
 		const size_type n = m_next_size(_n);
 		m_buckets.reserve(n);
