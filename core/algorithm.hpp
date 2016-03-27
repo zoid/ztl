@@ -1,3 +1,6 @@
+#ifndef _algorithm_hpp_1337420
+#define _algorithm_hpp_1337420
+
 #include "../ztl_base.hpp"
 
 __ztl_namespace_start
@@ -28,3 +31,5 @@ void memset_custom(T *dest, T val, uint32_t count) {
 
 
 __ztl_namespace_end
+
+#endif /*_algorithm_hpp_1337420 */
