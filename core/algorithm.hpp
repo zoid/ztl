@@ -12,7 +12,7 @@ template<typename T> void swap(T& t1, T& t2) {
 }
 
 template<typename T>
-void memset32(T *dest, int32_t val, uint32_t count) {
+void memset32(T *dest, T val, uint32_t count) {
 	/*__asm {
 		mov ecx, val
 		mov eax, count
