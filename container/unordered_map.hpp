@@ -4,7 +4,7 @@
 
 #include "../ztl_base.hpp"
 #include "../core/hash.hpp"
-#include "hash_table.hpp"
+#include "hashtable.hpp"
 
 
 __ztl_namespace_start
