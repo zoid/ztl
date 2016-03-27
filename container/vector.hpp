@@ -58,7 +58,7 @@ __ztl_namespace_start
 			p_end = p_begin + starting_size - 1;
 			p_last = p_begin - 1;
 
-			if(sizeof(T) == 1) memset(p_begin, init_value, starting_size);
+			if(sizeof(T) == 1) memset(p_begin, (int)init_value, starting_size);
 			if(sizeof(T) == 4) memset32(p_begin, init_value, starting_size);
 			else memset_custom(p_begin, init_value, starting_size);
 		}
