@@ -19,30 +19,27 @@ __ztl_namespace_start
 		template <class U1, class U2>
 		pair(const pair<U1, U2>& _p) : first(_p.first), second(_p.second) { }
 
-		inline pair& operator=(const pair& _x) { this->first = _x.first; this->second = _x.second; return *this; }
+		template<class U1, class U2>
+		inline pair& operator=(const pair<U1, U2>& _x) { if (*this != _x) { first = _x.first; second = _x.second; } return *this; }
+		inline pair& operator=(const pair& _x) { if (*this != _x) { first = _x.first; second = _x.second; } return *this; }
 		inline bool operator==(const pair& _x) { return _x.first == this->first && _x.second == this->second; }
 		inline bool operator<(const pair& _x) { return _x.first < this->first || (!(this->first < _x.first) && _x.second < this->second); }
-		inline bool operator!=(const pair& _x) { return !(_x == &this); }
+		inline bool operator!=(const pair& _x) { return _x.first != this->first && _x.second != this->second;}
 		inline bool operator>(const pair& _x) { return &this <_x; }
 		inline bool operator<=(const pair& _x) { return !(&this < _x); }
 		inline bool operator>=(const pair& _x) { return !(_x < &this); }
+
+		struct select1st {
+			const T1 operator()(const pair<T1, T2> _val) { return _val.first; }
+		};
+
+		struct select2nd {
+			const T2 operator()(const pair<T1, T2> _val) { return _val.second; }
+		};
 	};
 
 	template <class T1, class T2>
 	pair<T1, T2> make_pair(const T1& _x, const T2& _y) { return pair<T1, T2>(_x, _y); }
-
-
-	template<class T>
-	struct select1st {
-		typedef typename T::first_type return_type;
-		return_type operator()(const T _val) { return _val.first; }
-	};
-	
-	template<class T>
-	struct select2nd {
-		typedef typename T::first_type return_type;
-		return_type operator()(const T _val) { return _val.second; }
-	};
 
 __ztl_namespace_end
 
