@@ -8,6 +8,7 @@
 #include <type_traits>
 #include <iterator>
 
+#include "../core/algorithm.hpp"
 #include "../ztl_base.hpp"
 
 __ztl_namespace_start
@@ -21,8 +22,8 @@ __ztl_namespace_start
 		typedef __stl::random_access_iterator_tag		iterator_category;
 		typedef __stl::reverse_iterator<const_iterator>		const_reverse_iterator;
 		typedef __stl::reverse_iterator<iterator>		reverse_iterator;
-		typedef __stl::size_t					size_type;
-		typedef __stl::ptrdiff_t					difference_type;
+		typedef size_t						size_type;
+		typedef int						difference_type;
 
 	private:
 		iterator p_begin;
@@ -50,6 +51,16 @@ __ztl_namespace_start
 			p_begin = (iterator)malloc(sizeof(value_type) * starting_size);
 			p_end = p_begin + starting_size - 1;
 			p_last = p_begin - 1;
+		}
+		
+		vector(size_type starting_size, T init_value) {
+			p_begin = (iterator)malloc(sizeof(value_type) * starting_size);
+			p_end = p_begin + starting_size - 1;
+			p_last = p_begin - 1;
+
+			if(sizeof(T) == 1) memset(p_begin, init_value, starting_size);
+			if(sizeof(T) == 4) memset32(p_begin, init_value, starting_size);
+			else memset_custom(p_begin, init_value, starting_size);
 		}
 
 		~vector() {
