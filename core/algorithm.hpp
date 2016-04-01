@@ -30,6 +30,24 @@ void memset_custom(T *dest, T val, uint32_t count) {
 }
 
 
+
+/* Comparsion */
+template<class T>
+struct less {
+	inline bool operator()(const T& lhs, const T& rhs) const { return lhs < rhs; };
+};
+
+template<class T>
+struct equal_to {
+	inline bool operator()(const T& lhs, const T& rhs) const { return (!lhs) ? false : lhs == rhs; };
+};
+
+template <class T> 
+struct greater { inline bool operator() (const T& lhs, const T& rhs) const { return lhs > rhs; } };
+
+
+
+
 __ztl_namespace_end
 
 #endif /*_algorithm_hpp_1337420 */
