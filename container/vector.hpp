@@ -49,13 +49,13 @@ __ztl_namespace_start
 
 		vector(size_type starting_size) {
 			p_begin = (iterator)calloc(starting_size, sizeof(value_type));
-			p_end = p_begin + starting_size - 1;
+			p_end = p_begin + starting_size ;
 			p_last = p_end - 1;
 		}
 		
 		vector(size_type starting_size, T init_value) {
 			p_begin = (iterator)malloc(sizeof(value_type) * starting_size);
-			p_end = p_begin + starting_size - 1;
+			p_end = p_begin + starting_size;
 			p_last = p_begin - 1;
 
 			if(sizeof(T) == 1) memset(p_begin, (int)init_value, starting_size);
