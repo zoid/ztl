@@ -84,6 +84,11 @@ __ztl_namespace_start
 			if (p_last == p_end) enlarge();
 			new (++p_last) T(other);
 		}
+		
+		inline void pop_back() {
+			if (empty()) return;
+			(p_last--)->~T();
+		}
 
 		/* Access elements */
 		inline reference at(unsigned int id) {
@@ -104,12 +109,12 @@ __ztl_namespace_start
 
 		/* Iterators */
 		inline iterator				begin() { return p_begin; }
-		inline iterator				end() { return p_end; }
+		inline iterator				end() { return p_last + 1; }
 		inline const_iterator			cbegin() const { return p_begin; }
-		inline const_iterator			cend() const { return p_end; }
-		inline reverse_iterator			rbegin() { return reverse_iterator(p_end); }
+		inline const_iterator			cend() const { return p_last + 1; }
+		inline reverse_iterator			rbegin() { return reverse_iterator(end()); }
 		inline reverse_iterator			rend() { return reverse_iterator(p_begin); }
-		inline const_reverse_iterator		crbegin() const { return const_reverse_iterator(p_end); }
+		inline const_reverse_iterator		crbegin() const { return const_reverse_iterator(cend()); }
 		inline const_reverse_iterator		crend() const { return const_reverse_iterator(p_begin); }
 
 		inline reference			first() { return *p_begin; }
