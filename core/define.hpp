@@ -13,5 +13,13 @@ __ztl_namespace_start
 	typedef unsigned long long size_t;
 #endif
 
+/* Compatibility modes */
+#ifdef __stl_compatibility
+	#define _stl_use_containers 	0
+	#define _stl_use_string 	0
+	#define _stl_override_streams 	1
+#endif
+
+
 
 __ztl_namespace_end
