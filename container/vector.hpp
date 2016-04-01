@@ -48,9 +48,9 @@ __ztl_namespace_start
 		}
 
 		vector(size_type starting_size) {
-			p_begin = (iterator)malloc(sizeof(value_type) * starting_size);
+			p_begin = (iterator)calloc(starting_size, sizeof(value_type));
 			p_end = p_begin + starting_size - 1;
-			p_last = p_begin - 1;
+			p_last = p_end - 1;
 		}
 		
 		vector(size_type starting_size, T init_value) {
