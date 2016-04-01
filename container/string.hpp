@@ -1,27 +1,37 @@
-#ifndef m_data_hpp_1337420
-#define m_data_hpp_1337420
+#ifndef _string_hpp_1337420
+#define _string_hpp_1337420
+
+
+#include "../ztl_base.hpp"
 
 #include <cstdlib>
 #include <cmath>
 #include <memory>
 
-#ifdef __stl_compatibility
+#if _stl_accept_stl_params
 	#include <string>
+#endif
+
+#if _stl_override_streams
 	#include <sstream>
 #endif
 
-#include "../ztl_base.hpp"
+#if _stl_throw_exceptions
+	#include <exception>
+#endif
+
 
 __ztl_namespace_start
 
-class string {
+class string
+{
 public:
-	typedef unsigned long long				size_type;
-	typedef int						difference_type;
-	typedef char*						iterator;
-	typedef const char*					const_iterator;
+	typedef unsigned long long						size_type;
+	typedef int										difference_type;
+	typedef char*									iterator;
+	typedef const char*								const_iterator;
 	typedef __stl::reverse_iterator<iterator>		reverse_iterator;
-	typedef __stl::reverse_iterator<const_iterator>		const_reverse_iterator;
+	typedef __stl::reverse_iterator<const_iterator>	const_reverse_iterator;
 	typedef __stl::random_access_iterator_tag		iterator_category;
 	
 private:
@@ -48,7 +58,7 @@ public:
 		memset(m_data, 0, m_capacity + 1);
 	}
 
-	string(const string & _x) : m_capacity(_x.m_capacity), m_length(_x.m_length) {
+	string::string(const string & _x) : m_capacity(_x.m_capacity), m_length(_x.m_length) {
 		if (_x != string::empty) {
 			m_data = new char[m_capacity + 1];
 			memset(m_data, 0, m_capacity + 1);
@@ -61,13 +71,14 @@ public:
 		}
 	}
 
-	~string() {
+	~string()
+	{
 		m_length = 0;
 		m_capacity = 0;
 		delete[] m_data;
 	}
 
-#ifdef __stl_compatibility
+#ifdef _stl_accept_stl_params
 	string(const __stl::string& _s) : m_length(_s.length()), m_capacity(m_length), m_data(new char[m_capacity + 1]) {
 		memcpy(m_data, _s.c_str(), m_length);
 		m_data[m_capacity] = '\0';
@@ -171,9 +182,9 @@ public:
 		m_data[m_capacity] = '\0';
 	}
 
-	inline char& at(int _i) {
+	inline char at(int _i) {
 		if (_i < 0 || _i >= m_length) {
-#ifdef __stl_compatibility
+#if _stl_throw_exceptions
 			throw __stl::out_of_range("Index out of range");
 #else
 			return NULL;
@@ -182,9 +193,9 @@ public:
 		return m_data[_i]; 
 	}
 
-	inline const char& at(int _i) const {
+	inline const char at(int _i) const {
 		if (_i < 0 || _i >= m_length) {
-#ifdef __stl_compatibility
+#if _stl_throw_exceptions
 			throw __stl::out_of_range("Index out of range");
 #else
 			return NULL;
@@ -193,25 +204,26 @@ public:
 		return m_data[_i];
 	}
 
-	inline size_type			length() const { return m_length; }
-	inline size_type			size() const { return m_length;	}
-	inline size_type			max_size() const { return size_type(-1); }
-	inline size_type			capacity() const { return m_capacity; }
+	inline size_type					length() const { return m_length; }
+	inline size_type					size() const { return m_length;	}
+	inline size_type					max_size() const { return size_type(-1); }
+	inline size_type					capacity() const { return m_capacity; }
 	
-	inline iterator				begin() { return m_data; }
-	inline iterator				end() { return m_data + m_length; }
-	inline const_iterator			cbegin() const { return m_data; }
-	inline const_iterator			cend() const { return m_data + m_length; }
-	inline reverse_iterator			rbegin() { return reverse_iterator(end()); }
-	inline reverse_iterator			rend() { return reverse_iterator(begin()); }
+	inline iterator						begin() { return m_data; }
+	inline iterator						end() { return m_data + m_length; }
+	inline const_iterator				cbegin() const { return m_data; }
+	inline const_iterator				cend() const { return m_data + m_length; }
+	inline reverse_iterator				rbegin() { return reverse_iterator(end()); }
+	inline reverse_iterator				rend() { return reverse_iterator(begin()); }
 	inline const_reverse_iterator		crbegin() const { return const_reverse_iterator(cend()); }
 	inline const_reverse_iterator		crend() const { return const_reverse_iterator(cbegin()); }
 
-	inline const char*			c_str() const { return m_data; }
+	inline const char*					c_str() const { return m_data; }
 
-	string& substr(int start_index, int length) const {
+	string& substr(int start_index, int length) const
+	{
 		if (start_index + length > m_length) {
-#ifdef __stl_compatibility
+#if _stl_throw_exceptions
 			throw __stl::invalid_argument("string::substr: length exceed string length");
 #else
 			return string::empty;
@@ -241,11 +253,9 @@ public:
 	friend bool operator!=(const string&, const char*);
 
 
-#ifdef __stl_compatibility
-
+#if _stl_override_streams
 	friend __stl::ostream & operator<< (__stl::ostream & os, const string & _x);
 	friend __stl::istream & operator>> (__stl::istream & is, string & _x);
-
 #endif
 
 };
@@ -297,11 +307,7 @@ bool operator!=(const string& _x, const char* _y) { return !(_y == _x); }
 
 
 
-
-
-
-
-#ifdef __stl_compatibility
+#if _stl_override_streams
 
 __stl::ostream & operator<< (__stl::ostream & os, const string & _x) {
 	os << _x.m_data;
@@ -328,4 +334,4 @@ __stl::istream & operator>> (__stl::istream & is, string& _x) {
 __ztl_namespace_end
 
 
-#endif
+#endif /* _string_hpp_1337420 */
