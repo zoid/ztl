@@ -120,6 +120,7 @@ __ztl_namespace_start
 		/* Size / Allocation */
 		inline bool				empty() const { return size() == 0; }
 		inline size_type			size() const { return p_last - p_begin + 1; }
+		inline size_type			max_size() const { return size_type(-1); }
 		inline size_type			reserved() const { return p_end - p_begin + 1; }
 		inline void				reserve(size_type num) { enlarge(num); }
 		inline void				clear() { erase(p_begin, p_last); }
