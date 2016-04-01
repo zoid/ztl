@@ -18,10 +18,14 @@ __ztl_namespace_start
 	#define _stl_use_containers 1
 	#define _stl_use_string 0
 	#define _stl_override_streams 1
+	#define _stl_throw_exceptions 1
+	#define _stl_accept_stl_params 1
 #else
 	#define _stl_use_containers 0
 	#define _stl_use_string 0
 	#define _stl_override_streams 0
+	#define _stl_throw_exceptions 0
+	#define _stl_accept_stl_params 0
 #endif
 
 
