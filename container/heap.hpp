@@ -54,16 +54,16 @@ public:
 		m_bubble_down(0);
 	}
 
-	inline const T&		  top()				{ return empty() ? T(0) : m_data[0]; }
-	inline bool			    empty() const		{ return m_data.empty(); }
-	inline size_type	  size()	const		{ return m_data.size(); }
-	inline size_type	  max_size() const	{ return m_data.max_size(); }
-	inline void			    clear()				{ m_data.clear(); }
+	inline const T&			top()			{ return empty() ? T(0) : m_data[0]; }
+	inline bool			empty() const		{ return m_data.empty(); }
+	inline size_type		size()	const		{ return m_data.size(); }
+	inline size_type		max_size() const	{ return m_data.max_size(); }
+	inline void			clear()			{ m_data.clear(); }
 
 private:
 
 #if _stl_use_containers
-	__stl::vector<T>	m_data;
+	__stl::vector<T>		m_data;
 #else
 	vector<T>			m_data;
 #endif
